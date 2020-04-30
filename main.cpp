@@ -19,7 +19,7 @@
     sprite.setTexture(texture);
 
     //sprite.setTextureRect(sf::IntRect(0, 0, 600, 600));  
-sprite.move(sf::Vector2f(50,40));// przesunęliśmy naszego Kapturka
+sprite.move(sf::Vector2f(50,40)); // przesunęliśmy naszego Kapturka
 
 
 
