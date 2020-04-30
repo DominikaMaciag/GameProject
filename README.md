@@ -12,8 +12,11 @@ Na razie poznaję bibliotekę sfml by pójść do przodu z moim projektem gry.
 Stworzyłam do tego plik main.cpp, którego nazwa może ulec zmianie w późniejszym stadium tworzenia projektu.
 Wyświetliłam w oknie naszą postać. Można nią poruszać klikając strzałkami w prawo/lewo oraz górę/dół. 
 Aby uruchomić program wpisujemy w konsolę terminala kolejno:
+
 g++ -c main.cpp
+
 g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
+
 ./sfml-app
 
 
