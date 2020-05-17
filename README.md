@@ -7,10 +7,15 @@ W zależności od tego na ile pozwolą mi moje zdolności postaram się stworzy�
 Pomysł na grę to jak na razie jedynie zarys, zapewne ulegnie on podczas tworzenia projektu zmianie. Każda zamieszczona tu grafika, została wykonana przeze mnie. 
 
 
+/////////////////////
 Update #1 30.04.2020r.
+
 Na razie poznaję bibliotekę sfml by pójść do przodu z moim projektem gry. 
+
 Stworzyłam do tego plik main.cpp, którego nazwa może ulec zmianie w późniejszym stadium tworzenia projektu.
+
 Wyświetliłam w oknie naszą postać. Można nią poruszać klikając strzałkami w prawo/lewo oraz górę/dół. 
+
 Aby uruchomić program wpisujemy w konsolę terminala kolejno:
 
 g++ -c main.cpp
@@ -18,5 +23,15 @@ g++ -c main.cpp
 g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
 ./sfml-app
+
+
+///////////////////////////
+Update #2 16.05-17.05.2020r.
+
+W swojej grze poprawiłam sposób poruszania się postacią, dodałam muzykę, bloki po których postać może się poruszać oraz tło mapy. 
+
+Dodatkowo nasza postać przyśpiesza gdy poruszamy się w prawo/lewo po płaskim terenie. 
+
+Stworzyłam również makefile dzięki któremu kompilujemy oraz uruchamiamy grę wpisując w konsolę: make run
 
 
