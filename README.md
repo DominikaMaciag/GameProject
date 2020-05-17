@@ -7,10 +7,8 @@ W zależności od tego na ile pozwolą mi moje zdolności postaram się stworzy�
 Pomysł na grę to jak na razie jedynie zarys, zapewne ulegnie on podczas tworzenia projektu zmianie. Każda zamieszczona tu grafika, została wykonana przeze mnie. 
 
 
-/////////////////////
-Update #1 30.04.2020r.
-
-Na razie poznaję bibliotekę sfml by pójść do przodu z moim projektem gry. 
+///////////////////////////
+Poznaję bibliotekę sfml, by ruszyć do przodu z moim projektem gry. 
 
 Stworzyłam do tego plik main.cpp, którego nazwa może ulec zmianie w późniejszym stadium tworzenia projektu.
 
@@ -33,5 +31,6 @@ W swojej grze poprawiłam sposób poruszania się postacią, dodałam muzykę, b
 Dodatkowo nasza postać przyśpiesza gdy poruszamy się w prawo/lewo po płaskim terenie. 
 
 Stworzyłam również makefile dzięki któremu kompilujemy oraz uruchamiamy grę wpisując w konsolę: make run
+
 
 
