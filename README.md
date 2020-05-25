@@ -33,4 +33,7 @@ Dodatkowo nasza postać przyśpiesza gdy poruszamy się w prawo/lewo po płaskim
 Stworzyłam również makefile dzięki któremu kompilujemy oraz uruchamiamy grę wpisując w konsolę: make run
 
 
+///////////////////////////
+Update #3 23.05-24.05.2020r.
 
+Utworzyłam klasę do bloczkow, którą rozdzieliłam do pliku KlasaBlok.cpp oraz KlasaBlok.h oraz poprawiłam grafikę. 
