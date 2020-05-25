@@ -36,4 +36,4 @@ Stworzyłam również makefile dzięki któremu kompilujemy oraz uruchamiamy gr�
 ///////////////////////////
 Update #3 23.05-24.05.2020r.
 
-Utworzyłam klasę do bloczkow, którą rozdzieliłam do pliku KlasaBlok.cpp oraz KlasaBlok.h oraz poprawiłam grafikę. 
+Utworzyłam klasę do bloczkow, którą rozdzieliłam do pliku KlasaBlok.cpp oraz KlasaBlok.h oraz poprawiłam grafikę. Dodałam również konstruktor oraz konstruktor kopiujący.
