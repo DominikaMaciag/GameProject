@@ -10,7 +10,7 @@ class KlasaBlok: public sf::Sprite
 	{
 	public:
 	sf::Texture tekstura;
-	KlasaBlok (float x, float y);
-	KlasaBlok (const KlasaBlok &bloczek);
+	KlasaBlok (float x, float y); //deklaracja konstruktora
+	KlasaBlok (const KlasaBlok &bloczek); //deklaracja konstruktora kopiującego
 	};
  #endif
