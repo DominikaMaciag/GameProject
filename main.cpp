@@ -32,21 +32,22 @@ class Monety
 class Punkty : public Monety
 {
 //tu wczytujemy
-  Punkty ();
+  Punkty (int xparametr,int yparametr);
   int licznik ();
 };
 Punkty::Punkty(int xparametr,int yparametr)
 {
 tekstura.loadFromFile("tekstury/moneta.png");
-sprite.setTexture(tekstura);
+moneta.setTexture(tekstura);
 x=xparametr;
 y=yparametr;
-sprite.setPosition(x,y);
+moneta.setPosition(x,y);
 wartosc=10;
 }
-Punkty::licznik ()
+int Punkty:: licznik ()
 {
-
+moneta.setPosition(-200,-200);
+return wartosc;
 }
 
 /////////////////////////////////////////////////////////FUNKCJA//MAIN/////////////////////////////////////////////////////////
