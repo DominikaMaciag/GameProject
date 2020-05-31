@@ -26,3 +26,8 @@ Stworzyłam również makefile dzięki któremu kompilujemy oraz uruchamiamy gr�
 Update #3 23.05-24.05.2020r.
 
 Utworzyłam klasę do bloczkow, którą rozdzieliłam do pliku KlasaBlok.cpp oraz KlasaBlok.h oraz poprawiłam grafikę. Dodałam również konstruktor oraz konstruktor kopiujący.
+
+///////////////////////////
+Update #4 26.05.2020r.
+
+Utworzyłam klasę drzew KlasaDrzewo.cpp i KlasaDrzewo.h oraz dodałam oddzielne grafiki postaci, gdy porusza się w lewo/prawo.
