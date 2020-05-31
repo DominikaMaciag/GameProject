@@ -4,7 +4,6 @@
  #include <SFML/System/Time.hpp>
  #include <SFML/Graphics.hpp>
  #include <SFML/Audio.hpp>
- //#include <SFML/Text.hpp>
  
  #include "KlasaBlok.h"
  #include "KlasaDrzewo.h"
@@ -196,10 +195,15 @@ zbierable.push_back(&moneta4);
 
 
 ///////////////////////////TEKST///////////////////////////////////////
+sf::Font czcionka; //deklarujemy czcionkę
+czcionka.loadFromFile("tekstury/font.ttf");
 sf::Text tekst;
-tekst.setString("wynik:");
-tekst.setCharacterSize(30);
-tekst.setPosition(sf::Vector2f(200,200));
+tekst.setFont(czcionka);
+tekst.setString("wynik");
+tekst.setCharacterSize(80);
+tekst.setFillColor(sf::Color::Black);
+tekst.setStyle(sf::Text::Regular);
+tekst.setPosition(sf::Vector2f(20,20));
 
 
 ///////////////////////////CZAS///I///MUZYKA///////////////////////////
