@@ -4,6 +4,7 @@
  #include <SFML/System/Time.hpp>
  #include <SFML/Graphics.hpp>
  #include <SFML/Audio.hpp>
+ //#include <SFML/Text.hpp>
  
  #include "KlasaBlok.h"
  #include "KlasaDrzewo.h"
@@ -25,28 +26,52 @@ class Monety
   sf::Sprite moneta; 
   int x,y,wartosc;
   virtual int licznik() = 0; //metoda czysto wirtualna - nie ma ciała
-  //virtual void metodaCzystoWirtualna() =0; //metoda czysto wirtualna - nie ma ciała
 };
 
-//klasa pochodna
+//klasa pochodna 1
 class Punkty : public Monety
 {
+  public:
 //tu wczytujemy
   Punkty (int xparametr,int yparametr);
   int licznik ();
 };
 Punkty::Punkty(int xparametr,int yparametr)
 {
-tekstura.loadFromFile("tekstury/moneta.png");
+tekstura.loadFromFile("tekstury/moneta1.png");
 moneta.setTexture(tekstura);
 x=xparametr;
 y=yparametr;
+//moneta.setColor(sf::Color(195,100,50)); miedziana moneta
 moneta.setPosition(x,y);
 wartosc=10;
 }
 int Punkty:: licznik ()
 {
 moneta.setPosition(-200,-200);
+return wartosc;
+}
+
+//klasa pochodna 2
+class Punkty2 : public Monety
+{
+  public:
+//tu wczytujemy
+  Punkty2 (int xparametr,int yparametr);
+  int licznik ();
+};
+Punkty2::Punkty2(int xparametr,int yparametr)
+{
+tekstura.loadFromFile("tekstury/moneta2.png");
+moneta.setTexture(tekstura);
+x=xparametr;
+y=yparametr;
+moneta.setPosition(x,y);
+wartosc=20;
+}
+int Punkty2:: licznik ()
+{
+moneta.setPosition(-300,-300);
 return wartosc;
 }
 
@@ -63,7 +88,8 @@ bool kapturek_stoi=false;
 std::vector<sf::Sprite*> warstwa1; //tlo
 std::vector<sf::Sprite*> warstwa2; //detale
 std::vector<sf::Sprite*> warstwa3; //bloczki kapturek
-std::vector<sf::Sprite*> skakable; 
+std::vector<sf::Sprite*> skakable; //warstwa do skakania
+std::vector<Monety*> zbierable; //warstwa monet
 
  
 //////////////////////////////OBRAZY//////////////////////////////
@@ -153,6 +179,27 @@ sf::Sprite drzewo2;
 drzewo2.setTexture(detal3);
 drzewo2.setPosition(sf::Vector2f(470,260));
 warstwa2.push_back(&drzewo2);
+
+/* monety */
+Punkty moneta1(200,590);
+warstwa2.push_back(&moneta1.moneta);
+zbierable.push_back(&moneta1);
+Punkty2 moneta2(300,590);
+warstwa2.push_back(&moneta2.moneta);
+zbierable.push_back(&moneta2);
+Punkty moneta3(400,590);
+warstwa2.push_back(&moneta3.moneta);
+zbierable.push_back(&moneta3);
+Punkty2 moneta4(500,590);
+warstwa2.push_back(&moneta4.moneta);
+zbierable.push_back(&moneta4);
+
+
+///////////////////////////TEKST///////////////////////////////////////
+sf::Text tekst;
+tekst.setString("wynik:");
+tekst.setCharacterSize(30);
+tekst.setPosition(sf::Vector2f(200,200));
 
 
 ///////////////////////////CZAS///I///MUZYKA///////////////////////////
@@ -275,14 +322,19 @@ if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {kapturek.setPosition KAPTUREK_
 for(int i=0;i<warstwa1.size();i++)
 	{window.draw(*warstwa1[i]);
 	}
-//window.draw(krzak);
 for(int i=0;i<warstwa2.size();i++)
 	{window.draw(*warstwa2[i]);
 	}	
-//window.draw(krzak);
 for(int i=0;i<warstwa3.size();i++)
 	{window.draw(*warstwa3[i]);
 	}
+for(int i=0; i<zbierable.size(); i++)
+	{if ( (*zbierable[i]).moneta.getGlobalBounds().intersects(kapturek.getGlobalBounds()) )  
+		{
+		(*zbierable[i]).licznik();
+		}
+	}
+window.draw(tekst);
 window.display();
  
 while (zegar.getElapsedTime()<czas) {usleep(10);}
