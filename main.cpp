@@ -1,4 +1,3 @@
-
  #include <iostream>
  #include <unistd.h>
  #include <SFML/System/Clock.hpp>
@@ -7,13 +6,48 @@
  #include <SFML/Audio.hpp>
  
  #include "KlasaBlok.h"
+ #include "KlasaDrzewo.h"
  
  #define KAPTUREK_SPADANIE 0.005
- #define KAPTUREK_CHODZENIE 0.3
+ #define KAPTUREK_CHODZENIE 0.1
  #define KAPTUREK_PRZYSPIESZENIE 0.0005
  #define SKOK_MOC 0.8
  #define KAPTUREK_SPAWN (0,524)
  #define SZYBKOSC 1200
+ #define PREDKOSC_W_ZABUDOWANYM 1
+ 
+ /* Klasy abstrakcyjna */
+ //klasa abstrakcyjna do monet
+class Monety 
+{ 
+  public:
+  sf::Texture tekstura;
+  sf::Sprite moneta; 
+  int x,y,wartosc;
+  virtual int licznik() = 0; //metoda czysto wirtualna - nie ma ciała
+  //virtual void metodaCzystoWirtualna() =0; //metoda czysto wirtualna - nie ma ciała
+};
+
+//klasa pochodna
+class Punkty : public Monety
+{
+//tu wczytujemy
+  Punkty ();
+  int licznik ();
+};
+Punkty::Punkty(int xparametr,int yparametr)
+{
+tekstura.loadFromFile("tekstury/moneta.png");
+sprite.setTexture(tekstura);
+x=xparametr;
+y=yparametr;
+sprite.setPosition(x,y);
+wartosc=10;
+}
+Punkty::licznik ()
+{
+
+}
 
 /////////////////////////////////////////////////////////FUNKCJA//MAIN/////////////////////////////////////////////////////////
 int main()
@@ -23,7 +57,8 @@ float poziomo_ruch=0;
 float pionowo_ruch=0;
 bool kapturek_stoi=false;
 
-//////////////WARSTWY GRAFIKI////
+
+/////////////////////////WARSTWY///GRAFIKI/////////////////////////
 std::vector<sf::Sprite*> warstwa1; //tlo
 std::vector<sf::Sprite*> warstwa2; //detale
 std::vector<sf::Sprite*> warstwa3; //bloczki kapturek
@@ -33,10 +68,14 @@ std::vector<sf::Sprite*> skakable;
 //////////////////////////////OBRAZY//////////////////////////////
 /* nasza postać - Czerwony Kapturek
 tworzymy okienko by wyświetlić nasz plik
-nasze okienko ma wymiary 640x480 pixeli */
-sf::RenderWindow window(sf::VideoMode(1800, 900), "Witaj, jestem Kapturek!"); //800 440
+nasze okienko ma wymiary 1800x900 pixeli */
+sf::RenderWindow window(sf::VideoMode(1800, 900), "Witaj, jestem Kapturek!");
 
 sf::Texture texture; //definiujemy teksturę
+sf::Texture texturelewo;
+texturelewo.loadFromFile("tekstury/kaptureklewa.png");
+sf::Texture textureprawo;
+textureprawo.loadFromFile("tekstury/kapturekprawa.png");
 if (!texture.loadFromFile("tekstury/kapturek.png")) //wczytujemy nasz obraz 
 	{
 	std::cout << "Load failed" << std::endl;
@@ -46,7 +85,6 @@ sf::Sprite kapturek;
 kapturek.setTexture(texture);
 kapturek.setPosition KAPTUREK_SPAWN; 
 warstwa3.push_back(&kapturek);
-
 
 /* bloczki */
 KlasaBlok blok(0,620);
@@ -102,19 +140,17 @@ sf::Sprite krzak3(krzak);
 krzak3.setPosition(sf::Vector2f(660,400));
 warstwa2.push_back(&krzak3);
 
-/* drzewka */ //zrób klasę drzewek
-sf::Texture detal2; 
-detal2.loadFromFile("tekstury/drzewo.png"); //wysokie drzewo	
-sf::Sprite drzewo;
-drzewo.setTexture(detal2);
-drzewo.setPosition(sf::Vector2f(260,260));
-warstwa2.push_back(&drzewo);
+/* drzewka */ 
+KlasaDrzewo drzewko(260,260);
+warstwa2.push_back(&drzewko);
+KlasaDrzewo drzewko2(10,260);
+warstwa2.push_back(&drzewko2);
 
 sf::Texture detal3; 
 detal3.loadFromFile("tekstury/drzewo2.png"); //wysokie drzewo	
 sf::Sprite drzewo2;
 drzewo2.setTexture(detal3);
-drzewo2.setPosition(sf::Vector2f(480,260));
+drzewo2.setPosition(sf::Vector2f(470,260));
 warstwa2.push_back(&drzewo2);
 
 
@@ -124,7 +160,6 @@ sf::Time czas = sf::microseconds(SZYBKOSC);
 sf::Time czas_skok = sf::milliseconds(500);
 sf::Clock zegar;
 sf::Clock zegar_skok;
- 
  
 /* muzyka */
 sf::Music muzyka; //definiujemy muzykę
@@ -138,13 +173,13 @@ muzyka.setLoop(true); //muzyka będzie się odtwarzać w zapętleniu
 //muzyka.play(); //odtwarzamy muzykę 
 
 
-
-/////////////////////////////PĘTLA///WHILE//////////////////////////////
+/////////////////////////////PĘTLA///WHILE/////////////////////////////////////////////////////////////////////////////
 while (window.isOpen()) //pętla działa dopóki nie zamkniemy okna
 	{
 	zegar.restart();
 	sf::Event event;
 	pionowo_ruch += KAPTUREK_SPADANIE; 
+	kapturek.setTexture(texture);
 
 	while (window.pollEvent(event))
 		{
@@ -159,8 +194,8 @@ while (window.isOpen()) //pętla działa dopóki nie zamkniemy okna
 
 window.clear( ); //usuwa nieaktualny obraz
 
-/* kolizje */
 
+/////////////////////////////////KOLIZJE/////////////////////////////////
 		kapturek_stoi = false;
 for(int i=0;i<skakable.size();i++)
 	{
@@ -193,20 +228,23 @@ if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) //w dół
 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //w lewo
 	{
 	poziomo_ruch += -KAPTUREK_CHODZENIE;
+	kapturek.setTexture(texturelewo);
 	}
 	
 /* poruszanie się w prawo */ 
 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) //w prawo
 	{
 	poziomo_ruch += KAPTUREK_CHODZENIE;
+	kapturek.setTexture(textureprawo);
 	}
 	
 //poruszanie
+if (poziomo_ruch > PREDKOSC_W_ZABUDOWANYM) poziomo_ruch = PREDKOSC_W_ZABUDOWANYM;
+if (poziomo_ruch < -PREDKOSC_W_ZABUDOWANYM) poziomo_ruch = -PREDKOSC_W_ZABUDOWANYM;
 kapturek.move( sf::Vector2f(poziomo_ruch,pionowo_ruch) );
 	
-	
-	
-/* przyspieszanie chodu postaci */
+		
+//////////////////////PRZYSPIESZENIE///CHODU///POSTACI//////////////////////
 /* przyspieszanie w prawo */
 if( poziomo_ruch > (KAPTUREK_CHODZENIE - KAPTUREK_PRZYSPIESZENIE))
 	{
@@ -228,11 +266,10 @@ else if (poziomo_ruch < 0 )
 	}
 
 
+///////////////////////////////////RESTART///////////////////////////////////
+if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {kapturek.setPosition KAPTUREK_SPAWN;} //restartujemy wciskając q na klawiaturze
 
-/* restartujemy wciskając q*/
-if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {kapturek.setPosition KAPTUREK_SPAWN;}
-
-
+///////////////////////////////////WYŚWIETLANIE//////////////////////////////
 /* wyświetlamy obiekty w oknie */
 for(int i=0;i<warstwa1.size();i++)
 	{window.draw(*warstwa1[i]);
@@ -251,4 +288,4 @@ while (zegar.getElapsedTime()<czas) {usleep(10);}
 	}
 
 return EXIT_SUCCESS;
- }
+}
