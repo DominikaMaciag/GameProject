@@ -36,3 +36,8 @@ Utworzyłam klasę drzew KlasaDrzewo.cpp i KlasaDrzewo.h oraz dodałam oddzielne
 Update #5 31.05.2020r.
 
 Utworzyłam klasę abstrakcyjną która będzie odpowiadać za przyszłe klasy związane z monetami. Dodałam również tekst wyświetlający się w naszym oknie.
+
+///////////////////////////
+Update #6 03.06.2020r.
+
+Dodałam zakresową pętlę for, ulepszyłam tekst od teraz wyświetla wynik zdobytych punktów z zebranych monet. Moneta złota daje 20 punktów, natomiast srebrna 10. Dodatkowo kolor tekstu się zmienia.
