@@ -4,6 +4,8 @@
  #include <SFML/System/Time.hpp>
  #include <SFML/Graphics.hpp>
  #include <SFML/Audio.hpp>
+ #include <string>
+ #include <cmath> //do wartości bezwzględnej
  
  #include "KlasaBlok.h"
  #include "KlasaDrzewo.h"
@@ -43,7 +45,7 @@ x=xparametr;
 y=yparametr;
 //moneta.setColor(sf::Color(195,100,50)); miedziana moneta
 moneta.setPosition(x,y);
-wartosc=10;
+wartosc=20;
 }
 int Punkty:: licznik ()
 {
@@ -66,13 +68,14 @@ moneta.setTexture(tekstura);
 x=xparametr;
 y=yparametr;
 moneta.setPosition(x,y);
-wartosc=20;
+wartosc=10;
 }
 int Punkty2:: licznik ()
 {
 moneta.setPosition(-300,-300);
 return wartosc;
 }
+
 
 /////////////////////////////////////////////////////////FUNKCJA//MAIN/////////////////////////////////////////////////////////
 int main()
@@ -81,6 +84,9 @@ int main()
 float poziomo_ruch=0;
 float pionowo_ruch=0;
 bool kapturek_stoi=false;
+int wynik=0;
+int kolor=0;
+int r,g,b;
 
 
 /////////////////////////WARSTWY///GRAFIKI/////////////////////////
@@ -180,7 +186,7 @@ drzewo2.setPosition(sf::Vector2f(470,260));
 warstwa2.push_back(&drzewo2);
 
 /* monety */
-Punkty moneta1(200,590);
+Punkty moneta1(160,590);
 warstwa2.push_back(&moneta1.moneta);
 zbierable.push_back(&moneta1);
 Punkty2 moneta2(300,590);
@@ -196,12 +202,12 @@ zbierable.push_back(&moneta4);
 
 ///////////////////////////TEKST///////////////////////////////////////
 sf::Font czcionka; //deklarujemy czcionkę
-czcionka.loadFromFile("tekstury/font.ttf");
+czcionka.loadFromFile("tekstury/Minecraft.ttf");
 sf::Text tekst;
 tekst.setFont(czcionka);
-tekst.setString("wynik");
-tekst.setCharacterSize(80);
-tekst.setFillColor(sf::Color::Black);
+tekst.setString("wynik:"+ std::to_string(wynik));
+tekst.setCharacterSize(40);
+//tekst.setFillColor(sf::Color(76,74,77));
 tekst.setStyle(sf::Text::Regular);
 tekst.setPosition(sf::Vector2f(20,20));
 
@@ -321,6 +327,22 @@ else if (poziomo_ruch < 0 )
 ///////////////////////////////////RESTART///////////////////////////////////
 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {kapturek.setPosition KAPTUREK_SPAWN;} //restartujemy wciskając q na klawiaturze
 
+
+////////////////////////KOLORKI///NAPISU///WYNIK////////////////////////////
+tekst.setFillColor(sf::Color(r,g,b));
+tekst.setString("wynik:"+ std::to_string(wynik));
+r=510-abs (510-(((kolor/(15-wynik/5)-510)%1530)));
+if(r<0) r=0;
+if(r>250) r=255;
+g=510-abs (510-(((kolor/(15-wynik/5))%1530)));
+if(g>250) g=255;
+if(g<0) g=0;
+b=510-abs (510-(((kolor/(15-wynik/5))+510)%1530));
+if(b<0) b=0;
+if(b>250) b=255;
+kolor++;
+
+
 ///////////////////////////////////WYŚWIETLANIE//////////////////////////////
 /* wyświetlamy obiekty w oknie */
 for(int i=0;i<warstwa1.size();i++)
@@ -329,13 +351,15 @@ for(int i=0;i<warstwa1.size();i++)
 for(int i=0;i<warstwa2.size();i++)
 	{window.draw(*warstwa2[i]);
 	}	
-for(int i=0;i<warstwa3.size();i++)
-	{window.draw(*warstwa3[i]);
+//for(int i=0;i<warstwa3.size();i++)
+for(sf::Sprite* zmienna : warstwa3) //zakresowa pętla for 
+	{window.draw(*zmienna);
 	}
 for(int i=0; i<zbierable.size(); i++)
+//for(Monety* zmienna : zbierable)
 	{if ( (*zbierable[i]).moneta.getGlobalBounds().intersects(kapturek.getGlobalBounds()) )  
 		{
-		(*zbierable[i]).licznik();
+		wynik+=(*zbierable[i]).licznik();
 		}
 	}
 window.draw(tekst);
