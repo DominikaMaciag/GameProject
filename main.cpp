@@ -18,6 +18,7 @@
  #define SZYBKOSC 1200
  #define PREDKOSC_W_ZABUDOWANYM 1
  
+
 /* Klasa abstrakcyjna */
 class Monety // klasa abstrakcyjna do monet
 { 
@@ -77,6 +78,12 @@ int funkcjazaprzyjazniona(Monety* wskaznik) // funkcja zaprzyjaźniona, zwraca w
 {
 return (*wskaznik).wartosc;
 }
+
+bool operator==(sf::Sprite wskaznik,sf::Sprite wskaznik2) // przeciążamy operator ==
+{
+return (wskaznik2).getGlobalBounds().intersects((wskaznik).getGlobalBounds());
+}
+
 
 /////////////////////////////////////////////////////////FUNKCJA//MAIN/////////////////////////////////////////////////////////
 int main()
@@ -258,7 +265,8 @@ window.clear( ); //usuwa nieaktualny obraz
 		kapturek_stoi = false;
 for(int i=0;i<skakable.size();i++)
 	{
-		if ( (*skakable[i]).getGlobalBounds().intersects(kapturek.getGlobalBounds()) )  
+		//if ( (*skakable[i]).getGlobalBounds().intersects(kapturek.getGlobalBounds()) )  
+		if (kapturek== *skakable[i] ) // używamy przeciążonego operatora aby sprawdzić czy spite'y się przecinają
 		{
 		kapturek_stoi = true;
 		if (pionowo_ruch > 0) pionowo_ruch = 0;
