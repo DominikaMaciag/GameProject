@@ -5,7 +5,7 @@
  #include <SFML/Graphics.hpp>
  #include <SFML/Audio.hpp>
  #include <string>
- #include <cmath> //do wartości bezwzględnej
+ #include <cmath> // do wartości bezwzględnej
  
  #include "KlasaBlok.h"
  #include "KlasaDrzewo.h"
@@ -18,26 +18,27 @@
  #define SZYBKOSC 1200
  #define PREDKOSC_W_ZABUDOWANYM 1
  
- /* Klasy abstrakcyjna */
- //klasa abstrakcyjna do monet
-class Monety 
+/* Klasa abstrakcyjna */
+class Monety // klasa abstrakcyjna do monet
 { 
+  protected: // do wartości protected ma dostęp klasa Monety oraz jej przyjaciele
+  int wartosc;
+  friend int funkcjazaprzyjazniona(Monety*); // deklaraja przyjaciela
   public:
   sf::Texture tekstura;
   sf::Sprite moneta; 
-  int x,y,wartosc;
-  virtual int licznik() = 0; //metoda czysto wirtualna - nie ma ciała
+  int x,y;
+  virtual void licznik() = 0; // metoda czysto wirtualna - nie ma ciała
 };
 
-//klasa pochodna 1
-class Punkty : public Monety
+/* Klasa dziedzicząca */
+class Punkty : public Monety // klasa pochodna 1 (dziedziczenie)
 {
   public:
-//tu wczytujemy
   Punkty (int xparametr,int yparametr);
-  int licznik ();
+  void licznik ();
 };
-Punkty::Punkty(int xparametr,int yparametr)
+Punkty::Punkty(int xparametr,int yparametr) // definicja konstruktora
 {
 tekstura.loadFromFile("tekstury/moneta1.png");
 moneta.setTexture(tekstura);
@@ -47,21 +48,18 @@ y=yparametr;
 moneta.setPosition(x,y);
 wartosc=20;
 }
-int Punkty:: licznik ()
+void Punkty:: licznik () // definicja metody (funkcji w klasie), dzięki której monety znikają (od teraz funkcja zaprzyjaźniona liczy monety)
 {
 moneta.setPosition(-200,-200);
-return wartosc;
 }
 
-//klasa pochodna 2
-class Punkty2 : public Monety
+class Punkty2 : public Monety // klasa pochodna 2
 {
   public:
-//tu wczytujemy
   Punkty2 (int xparametr,int yparametr);
-  int licznik ();
+  void licznik ();
 };
-Punkty2::Punkty2(int xparametr,int yparametr)
+Punkty2::Punkty2(int xparametr,int yparametr) // definicja konstruktora
 {
 tekstura.loadFromFile("tekstury/moneta2.png");
 moneta.setTexture(tekstura);
@@ -70,17 +68,20 @@ y=yparametr;
 moneta.setPosition(x,y);
 wartosc=10;
 }
-int Punkty2:: licznik ()
+void Punkty2:: licznik ()  
 {
 moneta.setPosition(-300,-300);
-return wartosc;
 }
 
+int funkcjazaprzyjazniona(Monety* wskaznik) // funkcja zaprzyjaźniona, zwraca wartość
+{
+return (*wskaznik).wartosc;
+}
 
 /////////////////////////////////////////////////////////FUNKCJA//MAIN/////////////////////////////////////////////////////////
 int main()
 {
-/* zmienne do poruszania się */
+/* zmienne */
 float poziomo_ruch=0;
 float pionowo_ruch=0;
 bool kapturek_stoi=false;
@@ -359,7 +360,8 @@ for(int i=0; i<zbierable.size(); i++)
 //for(Monety* zmienna : zbierable)
 	{if ( (*zbierable[i]).moneta.getGlobalBounds().intersects(kapturek.getGlobalBounds()) )  
 		{
-		wynik+=(*zbierable[i]).licznik();
+		(*zbierable[i]).licznik();
+		wynik+=funkcjazaprzyjazniona(zbierable[i]); // wynik pobieramy za pomocą funkcji zaprzyjaźnionej
 		}
 	}
 window.draw(tekst);
