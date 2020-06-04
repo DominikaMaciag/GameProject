@@ -41,3 +41,8 @@ Utworzyłam klasę abstrakcyjną która będzie odpowiadać za przyszłe klasy z
 Update #6 03.06.2020r.
 
 Dodałam zakresową pętlę for, ulepszyłam tekst od teraz wyświetla wynik zdobytych punktów z zebranych monet. Moneta złota daje 20 punktów, natomiast srebrna 10. Dodatkowo kolor tekstu się zmienia.
+
+///////////////////////////
+Update #7 04.06.2020r.
+
+Dodałam deklarację przyjaciela w klasie macierzystej Monety
