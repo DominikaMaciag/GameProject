@@ -45,4 +45,4 @@ Dodałam zakresową pętlę for, ulepszyłam tekst od teraz wyświetla wynik zdo
 ///////////////////////////
 Update #7 04.06.2020r.
 
-Dodałam deklarację przyjaciela w klasie macierzystej Monety
+Dodałam deklarację przyjaciela w klasie macierzystej Monety oraz przeciążenie operatorów
