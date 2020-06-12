@@ -22,9 +22,9 @@
 /* Klasa abstrakcyjna */
 class Monety // klasa abstrakcyjna do monet
 { 
-  protected: // do wartości protected ma dostęp klasa Monety oraz jej przyjaciele
+  protected: // (PRZYJACIEL) do wartości protected ma dostęp klasa Monety oraz jej przyjaciele
   int wartosc;
-  friend int funkcjazaprzyjazniona(Monety*); // deklaraja przyjaciela
+  friend int funkcjazaprzyjazniona(Monety*); // (PRZYJACIEL) deklaraja przyjaciela
   public:
   sf::Texture tekstura;
   sf::Sprite moneta; 
@@ -53,33 +53,53 @@ void Punkty:: licznik () // definicja metody (funkcji w klasie), dzięki której
 {
 moneta.setPosition(-200,-200);
 }
-
-class Punkty2 : public Monety // klasa pochodna 2
-{
-  public:
-  Punkty2 (int xparametr,int yparametr);
-  void licznik ();
-};
-Punkty2::Punkty2(int xparametr,int yparametr) // definicja konstruktora
-{
-tekstura.loadFromFile("tekstury/moneta2.png");
-moneta.setTexture(tekstura);
-x=xparametr;
-y=yparametr;
-moneta.setPosition(x,y);
-wartosc=10;
-}
-void Punkty2:: licznik ()  
-{
-moneta.setPosition(-300,-300);
-}
-
-int funkcjazaprzyjazniona(Monety* wskaznik) // funkcja zaprzyjaźniona, zwraca wartość
+	/* Druga klasa dziedzicząca */
+	class Punkty2 : public Monety // klasa pochodna 2
+	{
+  	public:
+  	Punkty2 (int xparametr,int yparametr);
+  	void licznik ();
+	};
+	Punkty2::Punkty2(int xparametr,int yparametr) // definicja konstruktora
+	{
+	tekstura.loadFromFile("tekstury/moneta2.png");
+	moneta.setTexture(tekstura);
+	x=xparametr;
+	y=yparametr;
+	moneta.setPosition(x,y);
+	wartosc=10;
+	}
+	void Punkty2:: licznik () // definicja metody (funkcji w klasie), dzięki której monety znikają (od teraz funkcja zaprzyjaźniona liczy monety) 
+	{
+	moneta.setPosition(-300,-300);
+	}
+		/* Trzecia klasa dziedzicząca */
+		class Grzyb : public Monety // klasa pochodna 3
+		{
+  		public:
+  		Grzyb (int xparametr,int yparametr);
+ 		void licznik ();
+		};
+		Grzyb::Grzyb(int xparametr,int yparametr) // definicja konstruktora
+		{
+		tekstura.loadFromFile("tekstury/grzyb.png");
+		moneta.setTexture(tekstura);
+		x=xparametr;
+		y=yparametr;
+		moneta.setPosition(x,y);
+		wartosc=-10;
+		}
+		void Grzyb:: licznik () // definicja metody (funkcji w klasie), dzięki której przedmioty znikają (od teraz funkcja zaprzyjaźniona liczy przedmioty) 
+		{
+		moneta.setPosition(-460,-460);
+		}
+		
+int funkcjazaprzyjazniona(Monety* wskaznik) // (PRZYJACIEL) funkcja zaprzyjaźniona, zwraca wartość
 {
 return (*wskaznik).wartosc;
 }
 
-bool operator==(sf::Sprite wskaznik,sf::Sprite wskaznik2) // przeciążamy operator ==
+bool operator==(sf::Sprite wskaznik,sf::Sprite wskaznik2) // (OPERATOR) przeciążamy operator ==
 {
 return (wskaznik2).getGlobalBounds().intersects((wskaznik).getGlobalBounds());
 }
@@ -159,7 +179,6 @@ if (!background.loadFromFile("tekstury/mapa.png")) //wczytujemy nasz bloczek
 sf::Sprite mapa;
 mapa.setTexture(background);
 mapa.setPosition(sf::Vector2f(0,-132));
-//mapa.setScale(sf::Vector2f(1.5,1.5)); // możemy zmienić skalę mapy jednak w naszym przypadku jest to niepotrzebne
 warstwa1.push_back(&mapa);
 
 /* krzaczki */
@@ -179,12 +198,19 @@ warstwa2.push_back(&krzak2);
 sf::Sprite krzak3(krzak);
 krzak3.setPosition(sf::Vector2f(660,400));
 warstwa2.push_back(&krzak3);
+sf::Sprite krzak4(krzak);
+krzak4.setPosition(sf::Vector2f(900,460));
+warstwa2.push_back(&krzak4);
 
 /* drzewka */ 
 KlasaDrzewo drzewko(260,260);
 warstwa2.push_back(&drzewko);
 KlasaDrzewo drzewko2(10,260);
 warstwa2.push_back(&drzewko2);
+KlasaDrzewo drzewko3(900,260);
+warstwa2.push_back(&drzewko3);
+KlasaDrzewo drzewko4(1000,260);
+warstwa2.push_back(&drzewko4);
 
 sf::Texture detal3; 
 detal3.loadFromFile("tekstury/drzewo2.png"); //wysokie drzewo	
@@ -206,6 +232,19 @@ zbierable.push_back(&moneta3);
 Punkty2 moneta4(500,590);
 warstwa2.push_back(&moneta4.moneta);
 zbierable.push_back(&moneta4);
+Punkty moneta5(1040,590);
+warstwa2.push_back(&moneta5.moneta);
+zbierable.push_back(&moneta5);
+Punkty2 moneta6(1140,590);
+warstwa2.push_back(&moneta6.moneta);
+zbierable.push_back(&moneta6);
+
+Grzyb grzyb(520, 600);
+warstwa2.push_back(&grzyb.moneta);
+zbierable.push_back(&grzyb);
+Grzyb grzyb2(920, 600);
+warstwa2.push_back(&grzyb2.moneta);
+zbierable.push_back(&grzyb2);
 
 
 ///////////////////////////TEKST///////////////////////////////////////
@@ -266,7 +305,7 @@ window.clear( ); //usuwa nieaktualny obraz
 for(int i=0;i<skakable.size();i++)
 	{
 		//if ( (*skakable[i]).getGlobalBounds().intersects(kapturek.getGlobalBounds()) )  
-		if (kapturek== *skakable[i] ) // używamy przeciążonego operatora aby sprawdzić czy spite'y się przecinają
+		if (kapturek== *skakable[i] ) // (OPERATOR) używamy przeciążonego operatora aby sprawdzić czy spite'y się przecinają
 		{
 		kapturek_stoi = true;
 		if (pionowo_ruch > 0) pionowo_ruch = 0;
@@ -366,12 +405,13 @@ for(sf::Sprite* zmienna : warstwa3) //zakresowa pętla for
 	}
 for(int i=0; i<zbierable.size(); i++)
 //for(Monety* zmienna : zbierable)
-	{if ( (*zbierable[i]).moneta.getGlobalBounds().intersects(kapturek.getGlobalBounds()) )  
-		{
-		(*zbierable[i]).licznik();
-		wynik+=funkcjazaprzyjazniona(zbierable[i]); // wynik pobieramy za pomocą funkcji zaprzyjaźnionej
-		}
+{	if ( (*zbierable[i]).moneta.getGlobalBounds().intersects(kapturek.getGlobalBounds()) )  
+	{
+	(*zbierable[i]).licznik();
+	wynik+=funkcjazaprzyjazniona(zbierable[i]); // (PRZYJACIEL) wynik pobieramy za pomocą funkcji zaprzyjaźnionej
 	}
+}
+
 window.draw(tekst);
 window.display();
  
