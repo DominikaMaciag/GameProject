@@ -10,7 +10,7 @@ class KlasaDrzewo: public sf::Sprite
 	{
 	public:
 	sf::Texture tekstura;
-	KlasaDrzewo (float x, float y);
-	KlasaDrzewo (const KlasaDrzewo &drzewko);
+	KlasaDrzewo (float x, float y); //deklaracja konstruktora
+	KlasaDrzewo (const KlasaDrzewo &drzewko); //deklaracja konstruktora kopiującego
 	};
  #endif
