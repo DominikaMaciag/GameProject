@@ -24,7 +24,7 @@ class Monety // klasa abstrakcyjna do monet
 { 
   protected: // (PRZYJACIEL) do wartości protected ma dostęp klasa Monety oraz jej przyjaciele
   int wartosc;
-  friend int funkcjazaprzyjazniona(Monety*); // (PRZYJACIEL) deklaraja przyjaciela
+  friend int funkcjazaprzyjazniona(Monety*); // (PRZYJACIEL) deklaracja przyjaciela
   public:
   sf::Texture tekstura;
   sf::Sprite moneta; 
@@ -36,7 +36,7 @@ class Monety // klasa abstrakcyjna do monet
 class Punkty : public Monety // klasa pochodna 1 (dziedziczenie)
 {
   public:
-  Punkty (int xparametr,int yparametr);
+  Punkty (int xparametr,int yparametr); // deklaracja konstruktora
   void licznik ();
 };
 Punkty::Punkty(int xparametr,int yparametr) // definicja konstruktora
@@ -57,7 +57,7 @@ moneta.setPosition(-200,-200);
 	class Punkty2 : public Monety // klasa pochodna 2
 	{
   	public:
-  	Punkty2 (int xparametr,int yparametr);
+  	Punkty2 (int xparametr,int yparametr); // deklaracja konstruktora
   	void licznik ();
 	};
 	Punkty2::Punkty2(int xparametr,int yparametr) // definicja konstruktora
@@ -77,7 +77,7 @@ moneta.setPosition(-200,-200);
 		class Grzyb : public Monety // klasa pochodna 3
 		{
   		public:
-  		Grzyb (int xparametr,int yparametr);
+  		Grzyb (int xparametr,int yparametr); // deklaracja konstruktora
  		void licznik ();
 		};
 		Grzyb::Grzyb(int xparametr,int yparametr) // definicja konstruktora
