@@ -3,7 +3,7 @@ Autor: Dominika Maciąg
 
 !!!!!ZAGADNIENIA I SPOSÓB URUCHOMIENIA!!!!!
 Informacje te znajdują się w pliku zagadnienia.txt
-należy pobrać wszystkie pliki z repozytorium wraz z folderem tekstury
+należy pobrać wszystkie pliki z tego repozytorium 
 
 
 ///////////////////////////
