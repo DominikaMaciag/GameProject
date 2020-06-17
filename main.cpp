@@ -123,7 +123,7 @@ std::vector<sf::Sprite*> warstwa2; //detale
 std::vector<sf::Sprite*> warstwa3; //bloczki kapturek
 std::vector<sf::Sprite*> skakable; //warstwa do skakania
 std::vector<Monety*> zbierable; //warstwa monet
-
+std::vector<sf::Sprite*>::iterator iter; //deklaracja iteratora
  
 //////////////////////////////OBRAZY//////////////////////////////
 /* nasza postać - Czerwony Kapturek
@@ -301,17 +301,17 @@ window.clear( ); //usuwa nieaktualny obraz
 
 
 /////////////////////////////////KOLIZJE/////////////////////////////////
+
 		kapturek_stoi = false;
-for(int i=0;i<skakable.size();i++)
+for(iter=skakable.begin();iter<skakable.end();iter++) //użycie iteratora
 	{
 		//if ( (*skakable[i]).getGlobalBounds().intersects(kapturek.getGlobalBounds()) )  
-		if (kapturek== *skakable[i] ) // (OPERATOR) używamy przeciążonego operatora aby sprawdzić czy spite'y się przecinają
+		if (kapturek== **iter ) // (OPERATOR) używamy przeciążonego operatora aby sprawdzić czy spite'y się przecinają
 		{
 		kapturek_stoi = true;
 		if (pionowo_ruch > 0) pionowo_ruch = 0;
 		}
 	}
-
 
 /////////////////////PORUSZANIE///SIĘ////POSTACI//////////////////////////
 /* skok w górę */
