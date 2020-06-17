@@ -1,6 +1,16 @@
 # projekt_gra
 Autor: Dominika Maciąg
 
+!!!!!ZAGADNIENIA I SPOSÓB URUCHOMIENIA!!!!!
+Informacje te znajdują się w pliku zagadnienia.txt
+należy pobrać wszystkie pliki z repozytorium wraz z folderem tekstury
+
+
+///////////////////////////
+Krotki opis: stworzyłam prototyp gry platformowej polegającej na zbieraniu monet (moneta złota daje 20 punktów a srebrna 10) oraz poruszaniu się po mapie stworzonej z platform. Nasza postać - Kapturek musi uważać podczas swojej wedrówki na trujące grzyby (muchomory), które zabirają -10 punktów.
+
+///////////////////////////
+pomysł oraz początki:
 Planuję stworzyć grę platformową, która będzie inspirowana supermario/innymi prostymi grami zręcznościowymi. 
 Na mapie będą platformy oraz przeszkody, które nasz bohater będzie musiał pokonać. 
 W zależności od tego na ile pozwolą mi moje zdolności postaram się stworzyć grę w której naszym bohaterem jest Czerwony Kapturek, którego goni zły wilk. Mapą będzie las, wypełniony przeszkodami i pułapkami. Naszej postaci grożą trujące grzyby oraz dzikie zwierzęta. Nasz kapturek musi przejść całą mapę zbierając serca (odpowiednik monet w mario), by wykonać swój cel - przynieść koszyczek dla swojej chorej babci. By dotrzeć do domku babci nasza postać musi przejść przez cały las (mapę). 
@@ -8,6 +18,7 @@ Pomysł na grę to jak na razie jedynie zarys, zapewne ulegnie on podczas tworze
 
 
 ///////////////////////////
+Postępy w tworzeniu gry:
 Poznaję bibliotekę sfml, by ruszyć do przodu z moim projektem gry. 
 Stworzyłam do tego plik main.cpp, którego nazwa może ulec zmianie w późniejszym stadium tworzenia projektu.
 Wyświetliłam w oknie naszą postać. Można nią poruszać klikając strzałkami w prawo/lewo oraz górę/dół. 
