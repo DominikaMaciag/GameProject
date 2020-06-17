@@ -1,8 +1,8 @@
 .PHONY: clean all
 all: main.x
-main.x: main.o KlasaBlok.o
+main.x: main.o KlasaBlok.o KlasaDrzewo.o 
 %.x: %.o
-	g++ main.o KlasaBlok.o -o sfml.app -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system
+	g++ main.o KlasaBlok.o KlasaDrzewo.o -o sfml.app -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system 
 %.o: %.cpp
 	g++ -c -o $@ $<
 clean:
@@ -10,4 +10,3 @@ clean:
 	$(RM) *.x
 run: main.x
 	./sfml.app
-
