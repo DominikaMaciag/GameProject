@@ -1,0 +1,36 @@
+Lista zagadnień: 
+Projekt obiektowy
+1) klasy: 
+Klasa blok oraz klasa drzew (pliki: KlasaDrzewo.h KlasaDrzewo.cpp KlasaBlok.h KlasaDrzewo.cpp oraz klasa abstakcyjna i trzy klasy dziedziczące w pliku main.cpp linijka 22-95)
+2) konstruktory, destruktory
+deklaracje konstruktorów: (w main.cpp 39, 60, 80 linijka; w KlasaDzewo.h 13 linijka oraz w KlasaBlok.h 13 linijka)
+definicje konstruktorów: (w main.cpp 42, 63, 83 linijka; w KlasaDrzewo.cpp 2 linijka oraz w KlasaBlok.cpp 2 linijka)
+3) konstruktor kopiujący: 
+deklaracje: (w KlasaDrzewo.h 14 linijka oraz w KlasaBlok.h 14 linijka)
+definicje: (w KlasaDrzewo.cpp 9 linijka oraz w KlasaBlok.cpp 9 linijka)
+4) deklaracja przyjaciela: w main.cpp linijka 27 
+5) dziedziczenie: w pliku main.cpp stworzyłam 3 klasy wykorzystujące dziedziczenie: klasa punkty od linijki 36, klasa punkty2 od 57 linijki, oraz klasa grzyb od 77 linijki 
+6) polimorfizm: 410 linijka w main.cpp (korzystając ze wskaźnika na klasę macierzystą Monety posługujemy się metodami różnych klas pochodnych: Punkty Punkty2 oraz Grzyb)
+7) klasa abstrakcyjna: w main.cpp od 23 linijki
+8) czysto wirtualne metody: w main.cpp 32 linijka
+
+STL
+9) szablony: vector z biblioteki stl użyty w main.cpp od linijki 121-126
+10) iteratory: deklaracja w main.cpp linijka 126 użycie 306 i 309
+11) algorytmy: -
+
+C++
+12) zakresowa pętla for: main.cpp linijka 403
+13) własny szablon klasy lub funkcji: -
+14) przeciążenie operatorów: main.cpp linijka 102 i 309
+15) wyjątki: -
+16) plik .h z deklaracją i .cpp z definicją metod (KlasaDrzewo.h, KlasaBlok.h, KlasaDrzewo.cpp oraz KlasaBlok.cpp)
+17)linker: makefile 5 linijka
+
+Sposób uruchomienia:
+->Należy pobrać całą zawartość mojego repozytorium na githubie wraz z folderem tekstury
+->W konsoli należy wpisać make run
+->Postacią poruszamy używając strzałek na klawiaturze (prawo/lewo/góra - usunęłam możliwość poruszania się w dół) 
+->Jeśli chcemy zrestartować grę klikamy q na klawiaturze
+->W grze zbieramy monety które dają punkty (złota - 20, srebrna 10), trujące grzyby (muchomory) zabierają dziesięć punktów
+
