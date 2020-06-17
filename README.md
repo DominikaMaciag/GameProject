@@ -7,7 +7,8 @@ należy pobrać wszystkie pliki z tego repozytorium
 
 
 ///////////////////////////
-Krotki opis: stworzyłam prototyp gry platformowej polegającej na zbieraniu monet (moneta złota daje 20 punktów a srebrna 10) oraz poruszaniu się po mapie stworzonej z platform. Nasza postać - Kapturek musi uważać podczas swojej wedrówki na trujące grzyby (muchomory), które zabirają -10 punktów.
+Krotki opis: stworzyłam prototyp gry platformowej polegającej na zbieraniu monet (moneta złota daje 20 punktów a srebrna 10) oraz poruszaniu się po mapie stworzonej z platform. Nasza postać - Kapturek musi uważać podczas swojej wedrówki na trujące grzyby (muchomory), które zabirają -10 punktów.
+
 
 ///////////////////////////
 pomysł oraz początki:
